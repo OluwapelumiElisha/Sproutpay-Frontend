@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "https://po1--sproutvest-login--z2lspzgvtzdk.code.run/api/:path*" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

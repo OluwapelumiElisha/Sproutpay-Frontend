@@ -1,0 +1,18 @@
+# Netlify config for SproutPay (pure Vite SPA)
+
+[build]
+  command = "bun run build"
+  publish = "dist"
+
+# Proxy API calls to backend (same-origin -> no CORS)
+[[redirects]]
+  from = "/api/*"
+  to = "https://po1--sproutvest-login--z2lspzgvtzdk.code.run/api/:splat"
+  status = 200
+  force = true
+
+# SPA fallback for client-side routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
