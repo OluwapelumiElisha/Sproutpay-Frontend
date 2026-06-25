@@ -1,0 +1,7 @@
+# Netlify SPA fallback + API proxy (avoids CORS by using same-origin /api/*)
+
+# Proxy /api/* to the backend
+/api/*  https://po1--sproutvest-login--z2lspzgvtzdk.code.run/api/:splat  200
+
+# SPA fallback — every other route serves index.html so client-side routing works
+/*      /index.html                       200
