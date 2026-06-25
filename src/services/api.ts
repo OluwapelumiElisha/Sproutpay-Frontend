@@ -357,7 +357,7 @@ export async function register(payload: {
   lastName: string;
   userEmail: string;
   password: string;
-  captchaToken: boolean;
+  captchaToken: string;
 }) {
   return request<Record<string, unknown>>("/auth/register", {
     method: "POST",
@@ -372,7 +372,7 @@ export interface LoginResult {
   user?: Record<string, unknown>;
 }
 
-export async function loginApi(userEmail: string, password: string, captchaToken: boolean) {
+export async function loginApi(userEmail: string, password: string, captchaToken: string) {
   return request<LoginResult>("/auth/login", {
     method: "POST",
     body: JSON.stringify({ userEmail, password, captchaToken }),

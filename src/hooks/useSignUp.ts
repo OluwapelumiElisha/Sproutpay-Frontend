@@ -26,7 +26,7 @@ export function useSignUp() {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [captchaToken, setCaptchaToken] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState("");
 
   const [captchaReady, setCaptchaReady] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
@@ -44,7 +44,7 @@ export function useSignUp() {
   }, []);
 
   function resetCaptcha() {
-    setCaptchaToken(false);
+    setCaptchaToken("");
   }
 
   async function handleSubmit(e?: { preventDefault(): void }) {

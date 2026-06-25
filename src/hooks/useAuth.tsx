@@ -25,7 +25,7 @@ interface AuthContextValue {
   signIn: (
     email: string,
     password: string,
-    captchaToken?: boolean,
+    captchaToken?: string,
   ) => Promise<{ ok: boolean; message?: string }>;
   signOut: () => Promise<void>;
   refresh: () => Promise<void>;
@@ -118,7 +118,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const signIn = useCallback(
-    async (email: string, password: string, captchaToken = false) => {
+    async (email: string, password: string, captchaToken = "") => {
       const res = await loginApi(email, password, captchaToken);
       if (!res.success) {
         return { ok: false, message: res.message ?? "Login failed." };

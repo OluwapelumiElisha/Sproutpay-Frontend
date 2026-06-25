@@ -16,7 +16,7 @@ export function useLogin() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [captchaToken, setCaptchaToken] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState("");
   const [captchaReady, setCaptchaReady] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
@@ -31,7 +31,7 @@ export function useLogin() {
   }, []);
 
   function resetCaptcha() {
-    setCaptchaToken(false);
+    setCaptchaToken("");
   }
 
   async function handleSubmit(e?: { preventDefault(): void }) {
