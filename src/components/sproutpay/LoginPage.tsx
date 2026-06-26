@@ -15,6 +15,7 @@ export function LoginPage() {
     password, setPassword,
     captchaToken, setCaptchaToken,
     captchaReady,
+    siteKey,
     submitting,
     handleSubmit,
   } = useLogin();
@@ -90,6 +91,7 @@ export function LoginPage() {
 
           <div className="flex justify-center">
             <HumanCheck
+              siteKey={siteKey}
               captchaReady={captchaReady}
               captchaToken={captchaToken}
               onVerify={setCaptchaToken}

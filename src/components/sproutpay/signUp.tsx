@@ -13,6 +13,7 @@ export default function SignupPage() {
     password, setPassword,
     captchaToken, setCaptchaToken,
     captchaReady,
+    siteKey,
     fieldErrors,
     submitting,
     success,
@@ -113,6 +114,7 @@ export default function SignupPage() {
 
           <div className="flex justify-center">
             <HumanCheck
+              siteKey={siteKey}
               captchaReady={captchaReady}
               captchaToken={captchaToken}
               onVerify={setCaptchaToken}

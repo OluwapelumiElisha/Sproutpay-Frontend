@@ -349,7 +349,7 @@ export function normalizeTransaction(raw: Record<string, unknown>): Transaction 
 // ── Auth ─────────────────────────────────────────────────────────────────────
 
 export async function getClientConfig() {
-  return request<{ verificationMethod: "checkbox" }>("/auth/client-config", undefined, true);
+  return request<{ verificationMethod: string; turnstileSiteKey: string }>("/auth/client-config", undefined, true);
 }
 
 export async function register(payload: {

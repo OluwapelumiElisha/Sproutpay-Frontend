@@ -1,15 +1,15 @@
 import { Lock, ShieldCheck } from "lucide-react";
-import { HCaptcha } from "./HCaptcha";
+import { Turnstile } from "@marsidev/react-turnstile";
 
 interface CaptchaBlockProps {
   /** True once the client-config fetch settled (even if no key returned) */
   captchaReady: boolean;
-  /** hCaptcha site key — null means no captcha is required */
+  /** site key — null means no captcha is required */
   siteKey: string | null;
   captchaToken: string | null;
   onVerify: (token: string) => void;
   onExpire: () => void;
-  widgetRef: React.MutableRefObject<number | null>;
+  widgetRef?: React.MutableRefObject<any>;
   /** Button label while idle */
   label: string;
   /** Button label while submitting */
@@ -23,7 +23,6 @@ export function CaptchaBlock({
   captchaToken,
   onVerify,
   onExpire,
-  widgetRef,
   label,
   loadingLabel,
   submitting,
@@ -75,11 +74,11 @@ export function CaptchaBlock({
             {!captchaReady ? (
               <div className="skeleton rounded-xl" style={{ width: 303, height: 65 }} />
             ) : (
-              <HCaptcha
-                siteKey={siteKey}
-                onVerify={onVerify}
+              <Turnstile
+                siteKey={siteKey || "1x00000000000000000000AA"}
+                onSuccess={(token) => onVerify(token || "")}
                 onExpire={onExpire}
-                widgetRef={widgetRef}
+                onError={() => onVerify("")}
               />
             )}
           </div>
@@ -93,9 +92,9 @@ export function CaptchaBlock({
               color: "var(--muted-foreground)",
             }}
           >
-            Protected by hCaptcha —{" "}
+            Protected by Cloudflare Turnstile —{" "}
             <a
-              href="https://hcaptcha.com/privacy"
+              href="https://www.cloudflare.com/privacypolicy/"
               target="_blank"
               rel="noopener noreferrer"
               style={{ color: "var(--primary)", textDecoration: "none" }}
@@ -104,7 +103,7 @@ export function CaptchaBlock({
             </a>
             {" · "}
             <a
-              href="https://hcaptcha.com/terms"
+              href="https://www.cloudflare.com/website-terms/"
               target="_blank"
               rel="noopener noreferrer"
               style={{ color: "var(--primary)", textDecoration: "none" }}

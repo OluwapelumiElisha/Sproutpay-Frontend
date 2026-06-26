@@ -29,13 +29,19 @@ export function useSignUp() {
   const [captchaToken, setCaptchaToken] = useState("");
 
   const [captchaReady, setCaptchaReady] = useState(false);
+  const [siteKey, setSiteKey] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     getClientConfig()
-      .then(() => setCaptchaReady(true))
+      .then((res) => {
+        if (res.success && res.data) {
+          setSiteKey(res.data.turnstileSiteKey || null);
+        }
+        setCaptchaReady(true);
+      })
       .catch(() => setCaptchaReady(true));
 
     // Warm the on-ramp config cache while the user signs up, so Check Rate
@@ -115,6 +121,7 @@ export function useSignUp() {
     password, setPassword,
     captchaToken, setCaptchaToken,
     captchaReady,
+    siteKey,
     fieldErrors,
     submitting,
     success,
